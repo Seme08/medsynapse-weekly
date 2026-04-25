@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="MedSynapse Weekly — open-access medical newsletter in English, German and Italian." />
+  <title>MedSynapse Weekly</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ── RESET & TOKENS ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --red:      #A51C30;
+      --red-dark: #7d1424;
+      --navy:     #0F172A;
+      --navy2:    #1e293b;
+      --slate:    #475569;
+      --off:      #F8FAFC;
+      --border:   #E2E8F0;
+      --teal:     #0F766E;
+      --teal2:    #0d9488;
+      --mono:     'DM Mono', monospace;
+      --serif:    'DM Serif Display', Georgia, serif;
+      --sans:     'DM Sans', system-ui, sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--sans);
+      background: var(--off);
+      color: var(--navy);
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    button { font-family: var(--sans); cursor: pointer; }
+
+    /* ── UTILITIES ── */
+    .mono { font-family: var(--mono); }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+    .section-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--slate);
+      margin-bottom: 2rem;
+    }
+    .sr-only {
+      position: absolute; width: 1px; height: 1px;
+      overflow: hidden; clip: rect(0,0,0,0);
+    }
+
+    /* ── NAVIGATION ── */
+    .nav {
+      background: var(--navy);
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 58px;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      gap: 1.5rem;
+    }
+    .logo {
+      font-family: var(--serif);
+      font-size: 19px;
+      color: #fff;
+      white-space: nowrap;
+      letter-spacing: -0.3px;
+    }
+    .logo span { color: var(--red); }
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      flex: 1;
+      justify-content: center;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.55);
+      font-size: 13px;
+      letter-spacing: 0.2px;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: #fff; }
+    .lang-switcher { display: flex; gap: 4px; }
+    .lang-btn {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.18);
+      color: rgba(255,255,255,0.45);
+      font-family: var(--mono);
+      font-size: 11px;
+      padding: 4px 9px;
+      border-radius: 4px;
+      transition: all 0.15s;
+    }
+    .lang-btn:hover, .lang-btn.active {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.45);
+      color: #fff;
+    }
+    /* mobile menu toggle */
+    .nav-toggle {
+      display: none;
+      background: transparent;
+      border: none;
+      width: 28px;
+      height: 28px;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      padding: 0;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 100%;
+      height: 1.5px;
+      background: rgba(255,255,255,0.7);
+      border-radius: 1px;
+      transition: all 0.2s;
+    }
+
+    /* ── ISSUE BAR ── */
+    .issue-bar {
+      background: var(--red);
+      padding: 7px 2rem;
+    }
+    .issue-bar-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+    .issue-bar span {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: rgba(255,255,255,0.75);
+      letter-spacing: 0.5px;
+    }
+    .issue-bar strong { color: #fff; }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 5.5rem 0 4.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-kicker {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .hero-kicker::after {
+      content: '';
+      display: inline-block;
+      width: 32px;
+      height: 1px;
+      background: var(--red);
+    }
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(40px, 5.5vw, 62px);
+      line-height: 1.05;
+      letter-spacing: -1.5px;
+      color: var(--navy);
+      max-width: 780px;
+      margin-bottom: 1.75rem;
+    }
+    .hero h1 em { color: var(--red); font-style: italic; }
+    .hero-sub {
+      font-size: 17px;
+      color: var(--slate);
+      max-width: 580px;
+      line-height: 1.75;
+      font-weight: 300;
+      margin-bottom: 2.5rem;
+    }
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: var(--navy);
+      color: #fff;
+      border: 2px solid var(--navy);
+      padding: 13px 30px;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.2px;
+      transition: background 0.15s, border-color 0.15s;
+      border-radius: 0;
+    }
+    .btn-primary:hover { background: var(--navy2); border-color: var(--navy2); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--navy);
+      border: 2px solid var(--navy);
+      padding: 13px 30px;
+      font-size: 14px;
+      font-weight: 400;
+      transition: all 0.15s;
+      border-radius: 0;
+    }
+    .btn-ghost:hover { background: var(--navy); color: #fff; }
+    .hero-stat {
+      font-size: 12px;
+      color: var(--slate);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--teal);
+      display: inline-block;
+      flex-shrink: 0;
+    }
+
+    /* ── FEATURED ARTICLE ── */
+    .featured-section {
+      padding: 4rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .featured-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .featured-tag {
+      display: inline-block;
+      background: var(--red);
+      color: #fff;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 3px 11px;
+      margin-bottom: 1.25rem;
+    }
+    .featured-grid h2 {
+      font-family: var(--serif);
+      font-size: clamp(24px, 3vw, 34px);
+      line-height: 1.15;
+      letter-spacing: -0.5px;
+      color: var(--navy);
+      margin-bottom: 1rem;
+    }
+    .article-meta {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--slate);
+      margin-bottom: 1.1rem;
+    }
+    .article-excerpt {
+      font-size: 15px;
+      color: var(--slate);
+      line-height: 1.8;
+      font-weight: 300;
+      margin-bottom: 1.5rem;
+    }
+    .read-link {
+      color: var(--teal);
+      font-size: 13px;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap 0.15s;
+    }
+    .read-link:hover { gap: 10px; }
+    .featured-visual {
+      background: var(--navy);
+      aspect-ratio: 4 / 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .featured-visual-grid-line {
+      position: absolute;
+      background: rgba(255,255,255,0.04);
+    }
+    .featured-visual-icon {
+      font-family: var(--serif);
+      font-size: 88px;
+      color: rgba(165,28,48,0.25);
+      line-height: 1;
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+    .featured-visual-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: rgba(255,255,255,0.25);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-align: center;
+      margin-top: 0.75rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── ARTICLE GRID ── */
+    .articles-section {
+      border-bottom: 1px solid var(--border);
+    }
+    .articles-section-header {
+      padding: 2.5rem 0 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .article-card {
+      padding: 2rem;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+    .article-card:nth-child(3n) { border-right: none; }
+    .article-card:nth-last-child(-n+3) { border-bottom: none; }
+    .article-card:hover { background: #fff; }
+    .card-tag {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 0.75rem;
+    }
+    .card-title {
+      font-family: var(--serif);
+      font-size: 19px;
+      line-height: 1.25;
+      color: var(--navy);
+      margin-bottom: 0.75rem;
+    }
+    .card-excerpt {
+      font-size: 13px;
+      color: var(--slate);
+      line-height: 1.7;
+      font-weight: 300;
+      margin-bottom: 1.1rem;
+    }
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .card-date {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: #94a3b8;
+    }
+    .lang-pips { display: flex; gap: 4px; }
+    .pip {
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--mono);
+      font-size: 8px;
+      color: var(--slate);
+    }
+    .pip.on { background: var(--teal); color: #fff; }
+
+    /* ── ABOUT STRIP ── */
+    .about-section {
+      padding: 4rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .about-heading {
+      font-family: var(--serif);
+      font-size: clamp(28px, 3.5vw, 42px);
+      line-height: 1.1;
+      color: var(--navy);
+    }
+    .about-heading span { color: var(--red); display: block; }
+    .about-body p {
+      font-size: 15px;
+      color: var(--slate);
+      line-height: 1.85;
+      font-weight: 300;
+      margin-bottom: 1rem;
+    }
+    .about-body p:last-child { margin-bottom: 0; }
+    .about-body strong { color: var(--navy); font-weight: 500; }
+
+    /* ── SUBSCRIBE ── */
+    .subscribe-section {
+      background: var(--navy);
+      padding: 4.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .subscribe-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .subscribe-section h3 {
+      font-family: var(--serif);
+      font-size: clamp(24px, 3vw, 32px);
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+    }
+    .subscribe-section p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.45);
+      font-weight: 300;
+      line-height: 1.75;
+    }
+    .sub-form { display: flex; }
+    .sub-input {
+      flex: 1;
+      padding: 13px 16px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-right: none;
+      color: #fff;
+      font-family: var(--sans);
+      font-size: 14px;
+      outline: none;
+      border-radius: 0;
+      transition: border-color 0.15s;
+    }
+    .sub-input::placeholder { color: rgba(255,255,255,0.28); }
+    .sub-input:focus { border-color: rgba(255,255,255,0.4); }
+    .sub-btn {
+      background: var(--red);
+      border: 1px solid var(--red);
+      color: #fff;
+      padding: 13px 24px;
+      font-size: 13px;
+      font-weight: 500;
+      white-space: nowrap;
+      transition: background 0.15s;
+      border-radius: 0;
+    }
+    .sub-btn:hover { background: var(--red-dark); border-color: var(--red-dark); }
+    .sub-note {
+      margin-top: 10px;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: rgba(255,255,255,0.28);
+    }
+
+    /* ── AMA SECTION ── */
+    .ama-section {
+      padding: 4.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .ama-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 2.5rem;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .ama-heading {
+      font-family: var(--serif);
+      font-size: clamp(28px, 3.5vw, 38px);
+      line-height: 1.1;
+      color: var(--navy);
+    }
+    .ama-heading span { color: var(--red); font-style: italic; }
+    .ama-sub {
+      font-size: 14px;
+      color: var(--slate);
+      max-width: 360px;
+      font-weight: 300;
+      line-height: 1.7;
+      text-align: right;
+    }
+    .ama-box {
+      border: 1px solid var(--border);
+      background: #fff;
+    }
+    .ama-tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+      overflow-x: auto;
+    }
+    .ama-tab {
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid transparent;
+      padding: 13px 22px;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--slate);
+      cursor: pointer;
+      white-space: nowrap;
+      margin-bottom: -1px;
+      transition: all 0.15s;
+    }
+    .ama-tab:hover { color: var(--navy); }
+    .ama-tab.active { color: var(--navy); border-bottom-color: var(--red); }
+    .ama-panel { display: none; padding: 1.75rem; }
+    .ama-panel.active { display: block; }
+    .ama-textarea {
+      width: 100%;
+      min-height: 100px;
+      padding: 12px 14px;
+      font-family: var(--sans);
+      font-size: 14px;
+      color: var(--navy);
+      background: var(--off);
+      border: 1px solid var(--border);
+      resize: vertical;
+      outline: none;
+      line-height: 1.65;
+      border-radius: 0;
+      transition: border-color 0.15s;
+    }
+    .ama-textarea:focus { border-color: #94a3b8; }
+    .ama-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 12px;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .ama-hint { font-size: 12px; color: var(--slate); font-weight: 300; }
+    .questions-list { margin-top: 0; }
+    .q-item {
+      display: flex;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: flex-start;
+    }
+    .q-item:last-child { border-bottom: none; }
+    .q-quote {
+      font-family: var(--serif);
+      font-size: 28px;
+      color: var(--border);
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .q-body { flex: 1; }
+    .q-text { font-size: 14px; color: var(--navy); line-height: 1.55; }
+    .q-meta { font-family: var(--mono); font-size: 11px; color: #94a3b8; margin-top: 3px; }
+    .vote-btn {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--slate);
+      border: 1px solid var(--border);
+      background: transparent;
+      padding: 4px 10px;
+      flex-shrink: 0;
+      transition: all 0.15s;
+      border-radius: 0;
+    }
+    .vote-btn:hover { border-color: var(--teal); color: var(--teal); }
+    .vote-btn.voted { border-color: var(--teal); color: var(--teal); background: #f0fdfa; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy);
+      padding: 3.5rem 0 1.75rem;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 2.5rem;
+      margin-bottom: 3rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .footer-brand {
+      font-family: var(--serif);
+      font-size: 20px;
+      color: #fff;
+      margin-bottom: 0.75rem;
+    }
+    .footer-brand span { color: var(--red); }
+    .footer-tagline {
+      font-size: 13px;
+      color: rgba(255,255,255,0.32);
+      font-weight: 300;
+      line-height: 1.7;
+      max-width: 240px;
+    }
+    .footer-col-title {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 1rem;
+    }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 0.6rem; }
+    .footer-links a {
+      font-size: 13px;
+      color: rgba(255,255,255,0.45);
+      transition: color 0.15s;
+    }
+    .footer-links a:hover { color: #fff; }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: rgba(255,255,255,0.2);
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .footer-langs { display: flex; gap: 14px; }
+    .footer-langs a { color: rgba(255,255,255,0.3); transition: color 0.15s; }
+    .footer-langs a:hover { color: #fff; }
+
+    /* ── SUCCESS MESSAGES ── */
+    .success-msg {
+      display: none;
+      font-size: 13px;
+      color: var(--teal2);
+      margin-top: 8px;
+      font-family: var(--mono);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 860px) {
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 58px; left: 0; right: 0;
+        background: var(--navy);
+        padding: 1.5rem 2rem;
+        gap: 1.25rem;
+        border-top: 1px solid rgba(255,255,255,0.08);
+        z-index: 199;
+      }
+      .nav-toggle { display: flex; }
+      .featured-grid, .subscribe-grid, .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .featured-visual { aspect-ratio: 16/9; }
+      .articles-grid { grid-template-columns: 1fr; }
+      .article-card { border-right: none; }
+      .article-card:nth-last-child(-n+3) { border-bottom: 1px solid var(--border); }
+      .article-card:last-child { border-bottom: none; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .ama-sub { text-align: left; max-width: 100%; }
+    }
+    @media (max-width: 560px) {
+      .hero { padding: 3.5rem 0 3rem; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .sub-form { flex-direction: column; }
+      .sub-input { border-right: 1px solid rgba(255,255,255,0.15); border-bottom: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══ NAV ══ -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="/" class="logo" aria-label="MedSynapse Weekly home">Med<span>Synapse</span> Weekly</a>
+      <ul class="nav-links" id="nav-links" role="list">
+        <li><a href="#articles">Articles</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#subscribe">Subscribe</a></li>
+        <li><a href="#ama">Participate</a></li>
+      </ul>
+      <div class="lang-switcher" role="group" aria-label="Language selector">
+        <button class="lang-btn active" onclick="setLang('en', this)" aria-pressed="true">EN</button>
+        <button class="lang-btn" onclick="setLang('de', this)" aria-pressed="false">DE</button>
+        <button class="lang-btn" onclick="setLang('it', this)" aria-pressed="false">IT</button>
+      </div>
+      <button class="nav-toggle" onclick="toggleNav()" aria-label="Toggle menu" aria-expanded="false" id="nav-toggle">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ══ ISSUE BAR ══ -->
+  <div class="issue-bar" role="banner">
+    <div class="issue-bar-inner">
+      <span>Vol. 1 — Issue <strong>#01</strong> — <span id="issue-date">2026</span></span>
+      <span>Open-access · Evidence-based · <strong>EN · DE · IT</strong></span>
+    </div>
+  </div>
+
+  <!-- ══ HERO ══ -->
+  <section class="hero">
+    <div class="container">
+      <p class="hero-kicker mono">Medical science, made clear</p>
+      <h1>Evidence-based medicine<br>for the <em>curious</em> mind.</h1>
+      <p class="hero-sub">MedSynapse Weekly distils the most important developments in clinical research, pharmacology and global health — published simultaneously in English, German and Italian.</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="document.getElementById('subscribe').scrollIntoView({behavior:'smooth'})">Subscribe — it's free</button>
+        <button class="btn-ghost" onclick="document.getElementById('articles').scrollIntoView({behavior:'smooth'})">Browse articles</button>
+        <span class="hero-stat"><span class="dot"></span> A nonprofit publication with no ads</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FEATURED ARTICLE ══ -->
+  <section class="featured-section">
+    <div class="container">
+      <p class="section-label">Featured article — latest issue</p>
+      <div class="featured-grid">
+        <div>
+          <span class="featured-tag">Your first topic here</span>
+          <h2>Your First Article Title Goes Here</h2>
+          <p class="article-meta">Your Name · Date · X min read</p>
+          <p class="article-excerpt">This is where your featured article summary goes. Write 2–3 sentences that make the reader want to read more. Be specific, be clear, avoid jargon where possible.</p>
+          <a href="#" class="read-link">Read full article →</a>
+        </div>
+        <div class="featured-visual" role="img" aria-label="Featured article illustration">
+          <div class="featured-visual-grid-line" style="top:0;left:33%;width:1px;height:100%;"></div>
+          <div class="featured-visual-grid-line" style="top:0;left:66%;width:1px;height:100%;"></div>
+          <div class="featured-visual-grid-line" style="top:33%;left:0;width:100%;height:1px;"></div>
+          <div class="featured-visual-grid-line" style="top:66%;left:0;width:100%;height:1px;"></div>
+          <div>
+            <div class="featured-visual-icon">+</div>
+            <div class="featured-visual-label">MedSynapse Weekly · Vol. 1</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ ARTICLES GRID ══ -->
+  <section class="articles-section" id="articles">
+    <div class="container">
+      <div class="articles-section-header">
+        <p class="section-label" style="margin-bottom:0;">Recent articles</p>
+      </div>
+    </div>
+    <div style="max-width:1100px; margin:0 auto; padding:0 2rem;">
+      <div class="articles-grid">
+
+        <article class="article-card">
+          <p class="card-tag">Cardiology</p>
+          <h3 class="card-title">Article title — replace with your own</h3>
+          <p class="card-excerpt">Brief summary of the article. What's the key finding? Who should care? Keep it to 2–3 short sentences.</p>
+          <div class="card-footer">
+            <span class="card-date mono">Add date · X min</span>
+            <div class="lang-pips" aria-label="Available languages">
+              <div class="pip on" title="English">EN</div>
+              <div class="pip on" title="German">DE</div>
+              <div class="pip on" title="Italian">IT</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="article-card">
+          <p class="card-tag">Neurology</p>
+          <h3 class="card-title">Article title — replace with your own</h3>
+          <p class="card-excerpt">Brief summary of the article. What's the key finding? Who should care? Keep it to 2–3 short sentences.</p>
+          <div class="card-footer">
+            <span class="card-date mono">Add date · X min</span>
+            <div class="lang-pips" aria-label="Available languages">
+              <div class="pip on" title="English">EN</div>
+              <div class="pip on" title="German">DE</div>
+              <div class="pip" title="Italian">IT</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="article-card">
+          <p class="card-tag">Pharmacology</p>
+          <h3 class="card-title">Article title — replace with your own</h3>
+          <p class="card-excerpt">Brief summary of the article. What's the key finding? Who should care? Keep it to 2–3 short sentences.</p>
+          <div class="card-footer">
+            <span class="card-date mono">Add date · X min</span>
+            <div class="lang-pips" aria-label="Available languages">
+              <div class="pip on" title="English">EN</div>
+              <div class="pip" title="German">DE</div>
+              <div class="pip on" title="Italian">IT</div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ ABOUT ══ -->
+  <section class="about-section" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div>
+          <h2 class="about-heading">About the<span>project.</span></h2>
+        </div>
+        <div class="about-body">
+          <p><strong>MedSynapse Weekly</strong> is a nonprofit, open-access medical newsletter written for students, clinicians and anyone curious about science. Our mission is to make evidence-based medicine accessible — regardless of language, institution or geography.</p>
+          <p>Every article is written by our editorial team and published simultaneously in <strong>English, German and Italian</strong>. We accept no advertising and receive no industry funding.</p>
+          <p>We are always looking for readers who want to participate — ask questions, suggest topics, or contribute a piece.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SUBSCRIBE ══ -->
+  <section class="subscribe-section" id="subscribe">
+    <div class="container">
+      <div class="subscribe-grid">
+        <div>
+          <h3>Get it in your inbox,<br>every week.</h3>
+          <p>One curated article. Three languages. Zero ads. Join readers from clinical, academic and research backgrounds worldwide.</p>
+        </div>
+        <div>
+          <div class="sub-form">
+            <input class="sub-input" type="email" id="sub-email" placeholder="your@email.com" aria-label="Email address" />
+            <button class="sub-btn" onclick="handleSubscribe()">Subscribe free</button>
+          </div>
+          <p class="sub-note" id="sub-note">Available in EN · DE · IT — choose on your first issue</p>
+          <p class="success-msg" id="sub-success">✓ Subscribed. Your first issue is on its way.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ AMA SECTION ══ -->
+  <section class="ama-section" id="ama">
+    <div class="container">
+      <div class="ama-header">
+        <div>
+          <p class="section-label">Reader participation</p>
+          <h2 class="ama-heading">Ask. Suggest.<br><span>Shape the next issue.</span></h2>
+        </div>
+        <p class="ama-sub">Have a question about a clinical topic? Curious about a recent trial? The most-voted questions get covered in an upcoming issue.</p>
+      </div>
+
+      <div class="ama-box" role="tabpanel">
+        <div class="ama-tabs" role="tablist">
+          <button class="ama-tab active" role="tab" aria-selected="true" onclick="switchTab('ask', this)">Ask a question</button>
+          <button class="ama-tab" role="tab" aria-selected="false" onclick="switchTab('suggest', this)">Suggest a topic</button>
+          <button class="ama-tab" role="tab" aria-selected="false" onclick="switchTab('vote', this)">Vote on questions</button>
+        </div>
+
+        <div class="ama-panel active" id="panel-ask">
+          <textarea class="ama-textarea" id="ama-q" placeholder="What would you like to know? E.g. &ldquo;What is the current evidence on intermittent fasting for type 2 diabetes?&rdquo;" aria-label="Your question"></textarea>
+          <div class="ama-row">
+            <p class="ama-hint" id="ask-hint">Questions may be answered in a future issue or directly by our team.</p>
+            <button class="btn-primary" style="padding:10px 22px;font-size:13px;" onclick="handleAMA()">Submit question</button>
+          </div>
+        </div>
+
+        <div class="ama-panel" id="panel-suggest">
+          <textarea class="ama-textarea" placeholder="Suggest a topic or a study you'd like us to cover. E.g. &ldquo;Any Phase III results on GLP-1 drugs for NAFLD?&rdquo;" aria-label="Topic suggestion"></textarea>
+          <div class="ama-row">
+            <p class="ama-hint">We cover reader-suggested topics every 4–6 weeks.</p>
+            <button class="btn-primary" style="padding:10px 22px;font-size:13px;">Submit suggestion</button>
+          </div>
+        </div>
+
+        <div class="ama-panel" id="panel-vote">
+          <div class="questions-list" id="questions-list">
+            <!-- questions injected by JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FOOTER ══ -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">Med<span>Synapse</span> Weekly</div>
+          <p class="footer-tagline">Nonprofit open-access medical journalism in English, German and Italian.</p>
+        </div>
+        <div>
+          <p class="footer-col-title">Content</p>
+          <ul class="footer-links">
+            <li><a href="#articles">All articles</a></li>
+            <li><a href="#articles">By topic</a></li>
+            <li><a href="#about">About</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-col-title">Project</p>
+          <ul class="footer-links">
+            <li><a href="#about">About us</a></li>
+            <li><a href="#ama">Contribute</a></li>
+            <li><a href="#subscribe">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-col-title">Languages</p>
+          <ul class="footer-links">
+            <li><a href="#" onclick="setLangByCode('en')">English</a></li>
+            <li><a href="#" onclick="setLangByCode('de')">Deutsch</a></li>
+            <li><a href="#" onclick="setLangByCode('it')">Italiano</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; <span id="yr"></span> MedSynapse Weekly — All content CC BY-NC 4.0</span>
+        <div class="footer-langs">
+          <a href="#" onclick="setLangByCode('en')">EN</a>
+          <a href="#" onclick="setLangByCode('de')">DE</a>
+          <a href="#" onclick="setLangByCode('it')">IT</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ── year & date ──
+    const now = new Date();
+    document.getElementById('yr').textContent = now.getFullYear();
+    document.getElementById('issue-date').textContent = now.toLocaleDateString('en-GB', {month:'long', year:'numeric'});
+
+    // ── nav toggle ──
+    function toggleNav() {
+      const links = document.getElementById('nav-links');
+      const toggle = document.getElementById('nav-toggle');
+      const open = links.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open);
+    }
+
+    // ── language switcher ──
+    const strings = {
+      en: {
+        kicker: 'Medical science, made clear',
+        h1: 'Evidence-based medicine<br>for the <em>curious</em> mind.',
+        sub: 'MedSynapse Weekly distils the most important developments in clinical research, pharmacology and global health — published simultaneously in English, German and Italian.',
+        sub_cta: "Subscribe — it's free",
+        browse: 'Browse articles',
+      },
+      de: {
+        kicker: 'Medizinische Wissenschaft, verständlich erklärt',
+        h1: 'Evidenzbasierte Medizin<br>für den <em>neugierigen</em> Geist.',
+        sub: 'MedSynapse Weekly fasst die wichtigsten Entwicklungen in der klinischen Forschung, Pharmakologie und globalen Gesundheit zusammen — gleichzeitig auf Englisch, Deutsch und Italienisch.',
+        sub_cta: 'Kostenlos abonnieren',
+        browse: 'Artikel durchsuchen',
+      },
+      it: {
+        kicker: 'Scienza medica, resa accessibile',
+        h1: 'Medicina basata sull\'evidenza<br>per la mente <em>curiosa</em>.',
+        sub: 'MedSynapse Weekly sintetizza i più importanti sviluppi nella ricerca clinica, farmacologia e salute globale — pubblicato simultaneamente in inglese, tedesco e italiano.',
+        sub_cta: 'Abbonati — è gratis',
+        browse: 'Sfoglia gli articoli',
+      }
+    };
+
+    function setLang(code, btn) {
+      document.querySelectorAll('.lang-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed','false'); });
+      btn.classList.add('active'); btn.setAttribute('aria-pressed','true');
+      applyLang(code);
+    }
+    function setLangByCode(code) {
+      const btn = [...document.querySelectorAll('.lang-btn')].find(b => b.textContent.toLowerCase() === code);
+      if (btn) setLang(code, btn);
+      return false;
+    }
+    function applyLang(code) {
+      const s = strings[code];
+      if (!s) return;
+      document.querySelector('.hero-kicker').firstChild.textContent = s.kicker;
+      document.querySelector('.hero h1').innerHTML = s.h1;
+      document.querySelector('.hero-sub').textContent = s.sub;
+      document.querySelectorAll('.btn-primary')[0].textContent = s.sub_cta;
+      document.querySelectorAll('.btn-ghost')[0].textContent = s.browse;
+    }
+
+    // ── subscribe ──
+    function handleSubscribe() {
+      const email = document.getElementById('sub-email').value.trim();
+      const note = document.getElementById('sub-note');
+      const success = document.getElementById('sub-success');
+      if (email && email.includes('@') && email.includes('.')) {
+        note.style.display = 'none';
+        success.style.display = 'block';
+        document.getElementById('sub-email').value = '';
+      } else {
+        note.textContent = 'Please enter a valid email address.';
+        note.style.color = '#fca5a5';
+      }
+    }
+
+    // ── AMA tabs ──
+    function switchTab(name, btn) {
+      document.querySelectorAll('.ama-tab').forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
+      document.querySelectorAll('.ama-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active'); btn.setAttribute('aria-selected','true');
+      document.getElementById('panel-' + name).classList.add('active');
+    }
+
+    // ── AMA submit ──
+    function handleAMA() {
+      const q = document.getElementById('ama-q').value.trim();
+      const hint = document.getElementById('ask-hint');
+      if (q.length > 8) {
+        document.getElementById('ama-q').value = '';
+        hint.textContent = '✓ Question submitted — thank you! We may feature it in an upcoming issue.';
+        hint.style.color = 'var(--teal)';
+        setTimeout(() => { hint.textContent = 'Questions may be answered in a future issue or directly by our team.'; hint.style.color = ''; }, 5000);
+      } else {
+        hint.textContent = 'Please write at least a sentence.';
+        hint.style.color = '#ef4444';
+      }
+    }
+
+    // ── vote questions ──
+    const sampleQuestions = [
+      { text: 'What does the latest evidence say about GLP-1 drugs for non-alcoholic fatty liver disease?', meta: 'Reader question · Endocrinology', votes: 18 },
+      { text: 'Is there a meaningful difference between mRNA and protein-subunit COVID vaccines in immunocompromised patients?', meta: 'Reader question · Immunology', votes: 14 },
+      { text: 'What does current research say about long-term antibiotics for Lyme disease?', meta: 'Reader question · Infectious Disease', votes: 11 },
+    ];
+    const votedSet = new Set();
+
+    function renderQuestions() {
+      const list = document.getElementById('questions-list');
+      list.innerHTML = sampleQuestions.map((q, i) => `
+        <div class="q-item">
+          <div class="q-quote" aria-hidden="true">&ldquo;</div>
+          <div class="q-body">
+            <p class="q-text">${q.text}</p>
+            <p class="q-meta">${q.meta}</p>
+          </div>
+          <button class="vote-btn ${votedSet.has(i) ? 'voted' : ''}" onclick="vote(${i})" aria-label="Upvote this question">
+            &#9650; <span id="votes-${i}">${q.votes}</span>
+          </button>
+        </div>
+      `).join('');
+    }
+
+    function vote(i) {
+      if (votedSet.has(i)) { votedSet.delete(i); sampleQuestions[i].votes--; }
+      else { votedSet.add(i); sampleQuestions[i].votes++; }
+      renderQuestions();
+    }
+
+    renderQuestions();
+  </script>
+</body>
+</html>
