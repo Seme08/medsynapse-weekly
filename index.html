@@ -14,24 +14,22 @@
 
   <!-- ══ NAV ══ -->
   <nav class="nav" role="navigation" aria-label="Main navigation">
-    <div class="nav-inner">
-      <a href="/" class="logo" aria-label="MedSynapse Weekly home">Med<span>Synapse</span> Weekly</a>
-      <ul class="nav-links" id="nav-links" role="list">
-        <li><a href="#articles">Articles</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#subscribe">Subscribe</a></li>
-        <li><a href="#ama">Participate</a></li>
+  <div class="nav-inner">
+    <a href="index.html" class="logo" aria-label="MedSynapse Weekly home">Med<span>Synapse</span> Weekly</a>
+    
+    <ul class="nav-links" id="nav-links">
       </ul>
-      <div class="lang-switcher" role="group" aria-label="Language selector">
-        <button class="lang-btn active" onclick="setLang('en', this)" aria-pressed="true">EN</button>
-        <button class="lang-btn" onclick="setLang('de', this)" aria-pressed="false">DE</button>
-        <button class="lang-btn" onclick="setLang('it', this)" aria-pressed="false">IT</button>
-      </div>
-      <button class="nav-toggle" onclick="toggleNav()" aria-label="Toggle menu" aria-expanded="false" id="nav-toggle">
-        <span></span><span></span><span></span>
-      </button>
+
+    <div class="lang-switcher" role="group" aria-label="Language selector">
+      <button class="lang-btn active" onclick="setLang('en', this)" aria-pressed="true">EN</button>
+      <button class="lang-btn" onclick="setLang('de', this)" aria-pressed="false">DE</button>
+      <button class="lang-btn" onclick="setLang('it', this)" aria-pressed="false">IT</button>
     </div>
-  </nav>
+
+    <button class="nav-toggle" onclick="toggleNav()" aria-label="Toggle menu" aria-expanded="false" id="nav-toggle">
+      <span></span><span></span><span></span>
+    </button>
+  </div> </nav>
 
   <!-- ══ ISSUE BAR ══ -->
   <div class="issue-bar" role="banner">
@@ -398,6 +396,14 @@ function applyLang(code) {
     }
 
     renderQuestions();
+    // This makes the "Read Article" button work the second the page loads
+window.addEventListener('load', function() {
+  // We manually trigger the English setup so the link isn't empty (#)
+  const enBtn = document.querySelector('.lang-btn.active');
+  if (enBtn) {
+    setLang('en', enBtn);
+  }
+});
   </script>
 </body>
 </html>
