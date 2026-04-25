@@ -993,14 +993,24 @@
       if (btn) setLang(code, btn);
       return false;
     }
-    function applyLang(code) {
+function applyLang(code) {
       const s = strings[code];
       if (!s) return;
+      
+      // Update the text on the homepage
       document.querySelector('.hero-kicker').firstChild.textContent = s.kicker;
       document.querySelector('.hero h1').innerHTML = s.h1;
       document.querySelector('.hero-sub').textContent = s.sub;
       document.querySelectorAll('.btn-primary')[0].textContent = s.sub_cta;
       document.querySelectorAll('.btn-ghost')[0].textContent = s.browse;
+
+      // Update the "Read full article" link to point to the correct file
+      const readLink = document.querySelector('.read-link');
+      if (readLink) {
+        if (code === 'en') readLink.setAttribute('href', 'article-01-en.html');
+        if (code === 'de') readLink.setAttribute('href', 'article-01-de.html');
+        if (code === 'it') readLink.setAttribute('href', 'article-01-it.html');
+      }
     }
 
     // ── subscribe ──
